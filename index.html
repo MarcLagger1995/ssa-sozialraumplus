@@ -5,45 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>SSA Sozialraumplus – Plattform für soziales Lernen, Gefühle und Gemeinschaft</title>
 
-<!-- Schriften: Fraunces (warme Serif für Headlines) + Inter Tight (klare Body-Schrift) -->
+<!-- Schriften:
+     - Open Sans: klare Body-Schrift wie auf der SMZO-Seite
+     - Caveat: handschriftlicher Akzent für den Slogan (wie «Unsere Leidenschaft. Für ein besseres Leben.») -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* ============================================================
-   SSA Sozialraumplus – Stylesheet
-   Aesthetic: warm, ruhig, freundlich, leicht handgezeichnet
+   SSA Sozialraumplus – SMZO-Design
+   Leitfarbe:   Petrol-Grün (#3a9484)
+   Akzentfarbe: Blau für Action-Buttons (wie «Online Anmeldung»)
+   Schriften:   Open Sans (Body) + Caveat (Hand-Akzent)
    ============================================================ */
 
 :root {
-  /* Farbpalette: warme Erdtöne mit sanftem Akzent */
-  --bg:           #faf6f0;
+  --bg:           #ffffff;
+  --bg-soft:      #f0f0f0;   /* gleiches Hellgrau wie SMZO-NEWS-Bereich */
   --bg-card:      #ffffff;
-  --bg-soft:      #f1ebe1;
-  --ink:          #2a2620;
-  --ink-soft:     #6b6359;
-  --ink-mute:     #9a9388;
-  --line:         #e6dccb;
-  --line-strong:  #d4c6ac;
+  --ink:          #333333;
+  --ink-soft:     #5e5e5e;
+  --ink-mute:     #8a8a8a;
+  --line:         #e2e2e2;
+  --line-strong:  #cfcfcf;
 
-  /* Akzentfarben (passen zu den Kategorien) */
-  --accent:       #c8654a;   /* warmes Terrakotta */
-  --accent-2:     #5b8a72;   /* salbei-grün */
-  --accent-3:     #d4a256;   /* warmes Gelb */
-  --accent-4:     #7a8db3;   /* gedecktes Blau */
+  --brand:        #3a9484;    /* Petrol-Grün */
+  --brand-dark:   #2f8a7a;
+  --brand-darker: #267063;
+  --brand-soft:   #e8f3f0;
+  --button-blue:  #4d59c4;
+  --button-blue-d:#3f4ab0;
 
-  /* Kategoriefarben (jeweils paarweise: Hintergrund / Text) */
-  --cat-1-bg:  #fbe6da;  --cat-1-fg:  #a3472f;   /* Konflikt – warm rot */
-  --cat-2-bg:  #e2eedc;  --cat-2-fg:  #4b6f3f;   /* Gemeinschaft – grün */
-  --cat-3-bg:  #fcdcd3;  --cat-3-fg:  #a8443a;   /* Mobbing – rot */
-  --cat-4-bg:  #fff1cc;  --cat-4-fg:  #8a6420;   /* Gefühle – gelb */
-  --cat-5-bg:  #ece2f0;  --cat-5-fg:  #6b4d83;   /* Selbstwert – lavendel */
-  --cat-6-bg:  #d8ebe8;  --cat-6-fg:  #2f6a64;   /* Teamgeist – petrol */
-  --cat-7-bg:  #ffe1c9;  --cat-7-fg:  #985a26;   /* Stress – orange */
-  --cat-8-bg:  #dfe3f3;  --cat-8-fg:  #43528f;   /* Regeln – blau */
+  /* Pastellige Kategorie-Kacheln */
+  --cat-1-bg:  #fde2db;  --cat-1-fg:  #a3472f;
+  --cat-2-bg:  #d8ebe5;  --cat-2-fg:  #2f6a64;
+  --cat-3-bg:  #fcd6cc;  --cat-3-fg:  #a8443a;
+  --cat-4-bg:  #fff1cc;  --cat-4-fg:  #8a6420;
+  --cat-5-bg:  #ece2f0;  --cat-5-fg:  #6b4d83;
+  --cat-6-bg:  #d8ebe8;  --cat-6-fg:  #2f6a64;
+  --cat-7-bg:  #ffe1c9;  --cat-7-fg:  #985a26;
+  --cat-8-bg:  #dfe3f3;  --cat-8-fg:  #43528f;
   --cat-9-bg:  #e2eedc;  --cat-9-fg:  #4b6f3f;
-  --cat-10-bg: #fcdcd3;  --cat-10-fg: #a8443a;
+  --cat-10-bg: #fcd6cc;  --cat-10-fg: #a8443a;
   --cat-11-bg: #dfe3f3;  --cat-11-fg: #43528f;
   --cat-12-bg: #e2eedc;  --cat-12-fg: #4b6f3f;
   --cat-13-bg: #ece2f0;  --cat-13-fg: #6b4d83;
@@ -51,167 +55,258 @@
   --cat-15-bg: #ffe1c9;  --cat-15-fg: #985a26;
   --cat-16-bg: #fff1cc;  --cat-16-fg: #8a6420;
 
-  --radius:    18px;
-  --radius-lg: 26px;
-  --radius-sm: 12px;
-  --shadow:    0 1px 2px rgba(42,38,32,.04), 0 8px 24px -12px rgba(42,38,32,.12);
-  --shadow-lg: 0 20px 50px -20px rgba(42,38,32,.18);
+  --radius:    6px;
+  --radius-sm: 4px;
+  --shadow:    0 1px 3px rgba(0,0,0,.06), 0 4px 12px rgba(0,0,0,.04);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,.10);
 }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 
 body {
-  font-family: 'Inter Tight', system-ui, -apple-system, sans-serif;
+  font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
   font-size: 16px;
-  line-height: 1.55;
+  line-height: 1.6;
   color: var(--ink);
   background: var(--bg);
-  /* dezente Papierstruktur durch zwei radial-gradients */
-  background-image:
-    radial-gradient(circle at 12% 8%, rgba(200, 101, 74, .04) 0, transparent 40%),
-    radial-gradient(circle at 88% 92%, rgba(91, 138, 114, .05) 0, transparent 45%);
-  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* ---------- Layout-Container ---------- */
+/* ============================================================
+   KOPFBEREICH (im Stil der SMZO-Website)
+   ============================================================ */
+
+.brand-bar {
+  background: var(--brand);
+  color: #fff;
+  padding: 22px 24px;
+  text-align: center;
+}
+.brand-bar .slogan {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.logo-bar {
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--line);
+  padding: 16px 24px;
+}
+.logo-bar-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: var(--ink);
+}
+.logo-mark {
+  width: 58px; height: 58px;
+  border: 2px solid var(--brand);
+  border-radius: 4px;
+  display: grid; place-items: center;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--brand);
+  background: #fff;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+.logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+.logo-text .l1 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--brand);
+}
+.logo-text .l2 {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.logo-nav {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.logo-nav a {
+  padding: 10px 18px;
+  text-decoration: none;
+  color: var(--brand);
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: background .15s, color .15s;
+}
+.logo-nav a:hover,
+.logo-nav a.current { background: var(--brand-soft); color: var(--brand-darker); }
+
+/* ============================================================
+   INTRO
+   ============================================================ */
+
 .container {
   max-width: 1180px;
   margin: 0 auto;
   padding: 0 24px;
 }
 
-/* ---------- Header ---------- */
-header.site-header {
-  padding: 56px 0 24px;
-  position: relative;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 36px;
-}
-.brand-mark {
-  width: 44px; height: 44px;
-  border-radius: 12px;
-  background: var(--accent);
-  color: #fff;
-  display: grid; place-items: center;
-  font-family: 'Fraunces', serif;
-  font-weight: 600;
-  font-size: 22px;
-  letter-spacing: -0.02em;
-  box-shadow: var(--shadow);
-}
-.brand-name {
-  font-family: 'Fraunces', serif;
-  font-weight: 600;
-  font-size: 18px;
-  letter-spacing: -0.01em;
-}
+section.intro-section { padding: 56px 0 32px; }
 
 h1.site-title {
-  font-family: 'Fraunces', serif;
-  font-weight: 500;
-  font-size: clamp(38px, 5.5vw, 64px);
-  line-height: 1.05;
-  letter-spacing: -0.025em;
-  margin: 0 0 14px;
+  font-weight: 700;
+  font-size: clamp(28px, 3.6vw, 40px);
+  line-height: 1.2;
+  color: var(--brand);
+  margin: 0 0 12px;
   max-width: 880px;
 }
-h1.site-title em {
-  font-style: italic;
-  color: var(--accent);
+.site-sub {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(22px, 2.4vw, 28px);
+  color: var(--ink-soft);
+  margin: 0 0 32px;
   font-weight: 500;
 }
-
-.site-sub {
-  font-size: clamp(17px, 1.4vw, 20px);
-  color: var(--ink-soft);
-  max-width: 720px;
-  margin: 0 0 28px;
-  font-weight: 400;
-}
-
 .intro {
-  max-width: 760px;
+  max-width: 800px;
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.75;
   color: var(--ink-soft);
-  border-left: 3px solid var(--line-strong);
-  padding: 6px 0 6px 22px;
   margin: 0 0 48px;
 }
-.intro p { margin: 0 0 12px; }
+.intro p { margin: 0 0 14px; }
 .intro p:last-child { margin-bottom: 0; }
 
-/* ---------- Suche ---------- */
-.search-wrap {
-  position: relative;
-  max-width: 540px;
-  margin: 0 0 56px;
+/* ============================================================
+   SUCHE (im Stil des SMZO-NEWS-Suchfelds)
+   ============================================================ */
+
+.search-bar {
+  background: var(--bg-soft);
+  padding: 28px 24px;
+  margin-bottom: 32px;
+  border-radius: var(--radius);
 }
-.search-wrap svg.icon {
-  position: absolute;
-  left: 18px; top: 50%;
-  transform: translateY(-50%);
-  width: 18px; height: 18px;
-  color: var(--ink-mute);
-  pointer-events: none;
+.search-bar-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
 }
-input.search {
-  width: 100%;
-  padding: 16px 18px 16px 48px;
+.search-bar h2 {
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--ink-soft);
+  margin: 0 32px 0 0;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.search-input-wrap {
+  flex: 1;
+  display: flex;
+  background: #fff;
+  border: 1px solid var(--brand);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.search-input-wrap input {
+  flex: 1;
+  border: 0;
+  padding: 12px 16px;
   font: inherit;
-  font-size: 16px;
-  border: 1.5px solid var(--line);
-  background: var(--bg-card);
-  border-radius: 999px;
+  font-size: 15px;
   outline: none;
   color: var(--ink);
-  transition: border-color .15s ease, box-shadow .15s ease;
-  box-shadow: var(--shadow);
+  background: transparent;
 }
-input.search:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 4px rgba(200, 101, 74, .12), var(--shadow);
+.search-input-wrap input::placeholder { color: var(--ink-mute); font-style: italic; }
+.search-input-wrap button {
+  width: 50px;
+  background: var(--ink-mute);
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  display: grid; place-items: center;
+  transition: background .15s;
 }
-input.search::placeholder { color: var(--ink-mute); }
+.search-input-wrap button:hover { background: var(--brand); }
+.search-input-wrap button svg { width: 18px; height: 18px; }
 
-/* ---------- Kategorie-Kacheln ---------- */
+/* ---- Suchresultate (direkt unter Suchbar) ---- */
+.search-results {
+  margin: 0 0 48px;
+  display: none;
+  animation: slideIn .25s ease;
+}
+.search-results.show { display: block; }
+.search-results-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.search-results-head h3 {
+  margin: 0;
+  color: var(--brand);
+  font-size: 18px;
+  font-weight: 700;
+}
+.search-results-head h3 strong { font-style: italic; }
+.search-results-clear {
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  color: var(--ink-soft);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.search-results-clear:hover { background: var(--brand); color: #fff; border-color: var(--brand); }
+
+/* ============================================================
+   KACHELN
+   ============================================================ */
+
 .section-label {
-  font-family: 'Fraunces', serif;
-  font-style: italic;
-  font-weight: 500;
-  font-size: 14px;
-  color: var(--ink-mute);
-  text-transform: lowercase;
-  letter-spacing: 0.02em;
-  margin: 0 0 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 32px 0 18px;
 }
-
 .tiles {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
-  margin-bottom: 64px;
+  gap: 14px;
+  margin-bottom: 48px;
 }
-
 .tile {
   position: relative;
   text-align: left;
   cursor: pointer;
   padding: 22px 20px 20px;
   border-radius: var(--radius);
-  border: 1.5px solid var(--line);
-  background: var(--bg-card);
+  border: 1px solid var(--line);
+  background: #fff;
   font: inherit;
   color: var(--ink);
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
   overflow: hidden;
   min-height: 138px;
   display: flex;
@@ -219,42 +314,44 @@ input.search::placeholder { color: var(--ink-mute); }
   justify-content: space-between;
 }
 .tile:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--line-strong);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  border-color: var(--brand);
 }
 .tile.active {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(200, 101, 74, .14), var(--shadow-lg);
+  border-color: var(--brand);
+  box-shadow: 0 0 0 2px var(--brand-soft), var(--shadow);
 }
+.tile::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--brand);
+  opacity: 0;
+  transition: opacity .15s;
+}
+.tile:hover::before, .tile.active::before { opacity: 1; }
 
-.tile-top {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-}
+.tile-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
 .tile-icon {
   width: 42px; height: 42px;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   display: grid; place-items: center;
   font-size: 22px;
   flex-shrink: 0;
-  background: var(--bg-soft);
 }
 .tile-number {
-  font-family: 'Fraunces', serif;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 600;
   color: var(--ink-mute);
-  font-feature-settings: 'tnum';
+  letter-spacing: 0.05em;
 }
 .tile-title {
-  font-family: 'Fraunces', serif;
-  font-weight: 500;
-  font-size: 17px;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.3;
+  color: var(--brand);
   margin: 0 0 10px;
 }
 .tile-count {
@@ -264,22 +361,21 @@ input.search::placeholder { color: var(--ink-mute); }
   align-items: center;
   gap: 6px;
 }
-.tile-count .dot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-}
+.tile-count .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--brand); }
 .tile.empty .tile-count .dot { background: var(--ink-mute); opacity: .4; }
 
-/* ---------- Detail-Bereich ---------- */
+/* ============================================================
+   DETAILBEREICH
+   ============================================================ */
+
 .detail {
   margin: 0 0 64px;
-  padding: 36px 32px;
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  border: 1.5px solid var(--line);
+  padding: 32px;
+  background: var(--bg-soft);
+  border-radius: var(--radius);
+  border-left: 4px solid var(--brand);
   display: none;
-  animation: slideIn .3s ease;
+  animation: slideIn .25s ease;
 }
 .detail.show { display: block; }
 
@@ -293,190 +389,217 @@ input.search::placeholder { color: var(--ink-mute); }
   align-items: flex-start;
   justify-content: space-between;
   gap: 20px;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   flex-wrap: wrap;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
 }
 .detail-title {
-  font-family: 'Fraunces', serif;
-  font-weight: 500;
-  font-size: 28px;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--brand);
   margin: 0;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
-.detail-title .emoji { font-size: 32px; }
+.detail-title .emoji { font-size: 28px; }
 .detail-close {
-  background: transparent;
+  background: #fff;
   border: 1px solid var(--line-strong);
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   padding: 8px 16px;
   font: inherit;
   font-size: 14px;
   color: var(--ink-soft);
   cursor: pointer;
-  transition: background .15s, color .15s;
+  transition: background .15s, color .15s, border-color .15s;
 }
-.detail-close:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+.detail-close:hover { background: var(--brand); color: #fff; border-color: var(--brand); }
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   gap: 18px;
 }
-
 .card {
   display: flex;
   flex-direction: column;
   padding: 22px;
-  background: var(--bg-soft);
+  background: #fff;
   border-radius: var(--radius);
-  border: 1px solid transparent;
-  transition: border-color .15s, transform .15s;
+  border: 1px solid var(--line);
+  transition: border-color .15s, box-shadow .15s;
 }
-.card:hover { border-color: var(--line-strong); }
-
-.card-meta {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
-}
+.card:hover { border-color: var(--brand); box-shadow: var(--shadow); }
+.card-meta { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
 .tag {
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 600;
   padding: 4px 10px;
   border-radius: 999px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  background: rgba(255,255,255,.7);
-  color: var(--ink-soft);
 }
-.tag.type    { background: var(--ink); color: var(--bg); }
-.tag.level   { background: rgba(255,255,255,.9); border: 1px solid var(--line-strong); }
-
+.tag.type  { background: var(--brand); color: #fff; }
+.tag.level { background: var(--bg-soft); color: var(--ink-soft); border: 1px solid var(--line); }
 .card-title {
-  font-family: 'Fraunces', serif;
-  font-weight: 500;
-  font-size: 19px;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.3;
+  color: var(--brand);
   margin: 0 0 8px;
 }
 .card-desc {
   font-size: 14px;
-  line-height: 1.55;
+  line-height: 1.6;
   color: var(--ink-soft);
-  margin: 0 0 16px;
+  margin: 0 0 14px;
   flex-grow: 1;
 }
-.card-keywords {
-  font-size: 12px;
-  color: var(--ink-mute);
-  margin-bottom: 14px;
-  font-style: italic;
-}
+.card-keywords { font-size: 12px; color: var(--ink-mute); margin-bottom: 14px; }
 .card-keywords span { margin-right: 8px; }
-
+.card-cat-hint {
+  font-size: 12px;
+  color: var(--brand);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
 .card a.open-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   align-self: flex-start;
-  padding: 9px 18px;
-  background: var(--ink);
-  color: var(--bg);
+  padding: 10px 22px;
+  background: var(--button-blue);
+  color: #fff;
   text-decoration: none;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   font-size: 14px;
-  font-weight: 500;
-  transition: background .15s, transform .15s;
+  font-weight: 600;
+  transition: background .15s;
 }
-.card a.open-btn:hover {
-  background: var(--accent);
-  transform: translateX(2px);
-}
+.card a.open-btn:hover { background: var(--button-blue-d); }
 .card a.open-btn svg { width: 14px; height: 14px; }
-
 .empty-msg {
   padding: 36px 24px;
   text-align: center;
   color: var(--ink-soft);
-  background: var(--bg-soft);
+  background: #fff;
   border-radius: var(--radius);
   font-style: italic;
+  border: 1px solid var(--line);
 }
 .empty-msg .big {
-  font-size: 28px;
+  font-size: 32px;
   margin-bottom: 8px;
   display: block;
 }
 
-/* ---------- Footer ---------- */
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
 footer.site-footer {
-  border-top: 1px solid var(--line);
-  padding: 36px 0 56px;
-  margin-top: 32px;
-  font-size: 13px;
-  color: var(--ink-mute);
+  background: var(--brand);
+  color: #fff;
+  padding: 32px 24px;
+  margin-top: 48px;
+}
+footer.site-footer .container {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 12px;
+  font-size: 14px;
 }
-footer a {
-  color: var(--ink-mute);
+footer.site-footer a {
+  color: #fff;
   text-decoration: none;
-  border-bottom: 1px dotted var(--ink-mute);
-  transition: color .15s;
+  border-bottom: 1px dotted rgba(255,255,255,.5);
+  transition: border-color .15s;
 }
-footer a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+footer.site-footer a:hover { border-bottom-color: #fff; }
 
-/* ---------- Responsive ---------- */
-@media (max-width: 640px) {
-  header.site-header { padding: 36px 0 12px; }
-  .intro { padding-left: 16px; }
-  .detail { padding: 24px 20px; }
-  .tiles { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 760px) {
+  .logo-bar-inner { flex-direction: column; align-items: flex-start; }
+  section.intro-section { padding: 36px 0 16px; }
+  .search-bar-inner { flex-direction: column; align-items: stretch; gap: 14px; }
+  .search-bar h2 { margin: 0; text-align: center; }
+  .detail { padding: 22px 18px; }
+  .tiles { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
   .tile { padding: 18px 16px 16px; min-height: 124px; }
-  .tile-title { font-size: 15px; }
-  footer.site-footer { padding: 28px 0 36px; flex-direction: column; }
+  .tile-title { font-size: 14px; }
 }
 </style>
 </head>
 <body>
 
+<!-- =================== KOPFBEREICH (SMZO-STIL) =================== -->
+<div class="brand-bar">
+  <div class="slogan">Soziales Lernen, Gefühle und Gemeinschaft – gemeinsam stärken.</div>
+</div>
+
+<div class="logo-bar">
+  <div class="logo-bar-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">S+</div>
+      <div class="logo-text">
+        <span class="l1">SSA Sozialraumplus</span>
+        <span class="l2">Schulsozialarbeit Oberwallis</span>
+      </div>
+    </a>
+    <nav class="logo-nav">
+      <a href="index.html" class="current">Übersicht</a>
+      <a href="#kategorien">Kategorien</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</div>
+
+<!-- =================== HAUPTINHALT =================== -->
 <div class="container">
 
-  <!-- =================== HEADER =================== -->
-  <header class="site-header">
-    <div class="brand">
-      <div class="brand-mark">S+</div>
-      <div class="brand-name">SSA Sozialraumplus</div>
-    </div>
-
-    <h1 class="site-title">Soziales Lernen, <em>Gefühle</em> und Gemeinschaft.</h1>
-    <p class="site-sub">Eine Plattform der Schulsozialarbeit Oberwallis für Lehrpersonen.</p>
+  <section class="intro-section">
+    <h1 class="site-title">Plattform für soziales Lernen, Gefühle und Gemeinschaft</h1>
+    <p class="site-sub">für Lehrpersonen der Schulsozialarbeit Oberwallis</p>
 
     <div class="intro">
       <p>SSA Sozialraumplus ist eine von der Schulsozialarbeit Oberwallis entwickelte Onlineplattform für Lehrpersonen. Sie bündelt auf einer einzigen Seite vielfältige Impulse, Unterrichtsideen, Videos, Links und Unterlagen rund um soziales Lernen, Selbstkompetenzen und das gemeinsame Miteinander in der Klasse.</p>
       <p>Ziel der Plattform ist es, Lehrpersonen einfach, schnell und alltagsnah bei der Förderung sozialer und persönlicher Kompetenzen von Kindern und Jugendlichen zu unterstützen. Bei Bedarf steht zudem die Schulsozialarbeit Oberwallis für fachlichen Austausch, Reflexion oder Zusammenarbeit unterstützend zur Seite.</p>
     </div>
+  </section>
 
-    <!-- Suche -->
-    <div class="search-wrap">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-      <input class="search" id="search" type="text" placeholder="Suche nach Kategorie, Titel, Schlagwort …" autocomplete="off" />
+  <!-- Suchleiste -->
+  <div class="search-bar">
+    <div class="search-bar-inner">
+      <h2>Suche</h2>
+      <div class="search-input-wrap">
+        <input class="search" id="search" type="text" placeholder="Suche nach Kategorie, Titel, Schlagwort…" autocomplete="off" />
+        <button type="button" aria-label="Suchen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </button>
+      </div>
     </div>
-  </header>
+  </div>
 
-  <!-- =================== KATEGORIEN =================== -->
-  <p class="section-label">— Sechzehn Themen</p>
+  <!-- Suchresultate: erscheinen DIREKT UNTER der Suchleiste -->
+  <section class="search-results" id="search-results">
+    <div class="search-results-head">
+      <h3 id="search-results-title"></h3>
+      <button type="button" class="search-results-clear" id="search-clear">Suche zurücksetzen</button>
+    </div>
+    <div id="search-results-cards"></div>
+  </section>
+
+  <!-- Kategorien -->
+  <p class="section-label" id="kategorien">Sechzehn Themen</p>
   <div class="tiles" id="tiles"></div>
 
-  <!-- =================== DETAILBEREICH =================== -->
+  <!-- Detailbereich (für angeklickte Kategorien) -->
   <section class="detail" id="detail" aria-live="polite">
     <div class="detail-head">
       <h2 class="detail-title" id="detail-title"></h2>
@@ -485,24 +608,25 @@ footer a:hover { color: var(--accent); border-bottom-color: var(--accent); }
     <div id="detail-cards"></div>
   </section>
 
-  <!-- =================== FOOTER =================== -->
-  <footer class="site-footer">
+</div>
+
+<!-- =================== FOOTER =================== -->
+<footer class="site-footer" id="kontakt">
+  <div class="container">
     <div>© Schulsozialarbeit Oberwallis · SSA Sozialraumplus</div>
     <div><a href="admin.html">Administration</a></div>
-  </footer>
-
-</div>
+  </div>
+</footer>
 
 <script>
 /* ============================================================
    SSA Sozialraumplus – Logik
-   Daten werden im localStorage gespeichert (Key: SSA_DATA_V1).
-   Wenn keine Daten vorhanden sind, werden Beispieldaten geladen.
+   Daten im localStorage (Key: SSA_DATA_V1).
+   Bei erstem Aufruf werden Beispieldaten gesetzt.
    ============================================================ */
 
 const STORAGE_KEY = 'SSA_DATA_V1';
 
-/* Die 16 Kategorien – feste Reihenfolge, mit Emoji und Farbe */
 const CATEGORIES = [
   { id: 1,  name: 'Konfliktlösung und Kommunikation',         emoji: '💬' },
   { id: 2,  name: 'Klassengemeinschaft und Klassenklima',     emoji: '🤝' },
@@ -522,103 +646,20 @@ const CATEGORIES = [
   { id: 16, name: 'Eigene Stärken entdecken',                 emoji: '⭐' }
 ];
 
-/* Beispiel-Inhalte (nur beim allerersten Aufruf) */
 const SAMPLE_ITEMS = [
-  {
-    id: 'demo-1',
-    categoryId: 1,
-    title: 'Streitschlichter-Karten für die Klasse',
-    description: 'Ein Set von Gesprächskarten, das Schülerinnen und Schülern hilft, einen Streit Schritt für Schritt selbstständig zu lösen.',
-    type: 'Vorlage',
-    level: 'Zyklus 2',
-    url: 'https://www.schulsozialarbeit.ch/',
-    keywords: 'Streit, Schlichtung, Karten, Gesprächsführung',
-    emoji: '🃏'
-  },
-  {
-    id: 'demo-2',
-    categoryId: 2,
-    title: 'Morgenkreis – Ideen für die Woche',
-    description: 'Zehn schnelle Impulse für den Morgenkreis: kurze Übungen, die das Wir-Gefühl stärken.',
-    type: 'Unterrichtsidee',
-    level: 'Zyklus 1',
-    url: '',
-    keywords: 'Morgenkreis, Ritual, Wir-Gefühl, Klassenrat',
-    emoji: '🌅'
-  },
-  {
-    id: 'demo-3',
-    categoryId: 4,
-    title: 'Video: Was sind eigentlich Gefühle?',
-    description: 'Kurzes, kindgerechtes Erklärvideo über die Welt der Gefühle. Gut als Einstieg geeignet.',
-    type: 'Video',
-    level: 'Zyklus 1',
-    url: 'https://www.youtube.com/',
-    keywords: 'Video, Gefühle, Einstieg, Animation',
-    emoji: '🎬'
-  },
-  {
-    id: 'demo-4',
-    categoryId: 7,
-    title: 'Atemübung: 5-4-3-2-1 zur Beruhigung',
-    description: 'Eine einfache Achtsamkeitsübung, die in jeder Klasse spontan eingesetzt werden kann, wenn die Stimmung kippt.',
-    type: 'Unterrichtsidee',
-    level: 'alle',
-    url: '',
-    keywords: 'Atmung, Achtsamkeit, Stress, Beruhigung',
-    emoji: '🌬️'
-  },
-  {
-    id: 'demo-5',
-    categoryId: 3,
-    title: 'No-Blame-Approach – Methodenpapier',
-    description: 'Dokument zur lösungsorientierten Mobbing-Intervention ohne Schuldzuweisung. Mit Ablauf, Rollen und Praxistipps.',
-    type: 'Dokument',
-    level: 'Zyklus 3',
-    url: 'https://www.no-blame-approach.de/',
-    keywords: 'Mobbing, Intervention, Methodik, Klassengespräch',
-    emoji: '📄'
-  },
-  {
-    id: 'demo-6',
-    categoryId: 13,
-    title: 'Anker-Übung für Prüfungssituationen',
-    description: 'Kurze mentale Übung, mit der sich Jugendliche vor Tests innerlich sammeln können.',
-    type: 'Unterrichtsidee',
-    level: 'Sek II',
-    url: '',
-    keywords: 'Achtsamkeit, Prüfung, Anker, Selbstregulation',
-    emoji: '⚓'
-  },
-  {
-    id: 'demo-7',
-    categoryId: 16,
-    title: 'Stärken-Baum gestalten',
-    description: 'Bastelidee: Jede Schülerin und jeder Schüler gestaltet einen eigenen Baum, dessen Blätter die persönlichen Stärken zeigen.',
-    type: 'Unterrichtsidee',
-    level: 'Zyklus 2',
-    url: '',
-    keywords: 'Stärken, Bastel, Selbstbild, Klasse',
-    emoji: '🌳'
-  },
-  {
-    id: 'demo-8',
-    categoryId: 15,
-    title: 'Whatsapp-Regeln gemeinsam erarbeiten',
-    description: 'Ein Klassenprojekt: gemeinsam Regeln für die Klassenchat-Gruppe entwickeln. Mit Diskussions-Karten.',
-    type: 'Unterrichtsidee',
-    level: 'Zyklus 3',
-    url: '',
-    keywords: 'Chat, Regeln, Mediennutzung, Vereinbarung',
-    emoji: '💬'
-  }
+  { id:'demo-1', categoryId:1,  title:'Streitschlichter-Karten für die Klasse', description:'Ein Set von Gesprächskarten, das Schülerinnen und Schülern hilft, einen Streit Schritt für Schritt selbstständig zu lösen.', type:'Vorlage',         level:'Zyklus 2', url:'https://www.schulsozialarbeit.ch/', keywords:'Streit, Schlichtung, Karten, Gesprächsführung', emoji:'🃏' },
+  { id:'demo-2', categoryId:2,  title:'Morgenkreis – Ideen für die Woche',       description:'Zehn schnelle Impulse für den Morgenkreis: kurze Übungen, die das Wir-Gefühl stärken.',                                                  type:'Unterrichtsidee', level:'Zyklus 1', url:'',                                  keywords:'Morgenkreis, Ritual, Wir-Gefühl, Klassenrat',  emoji:'🌅' },
+  { id:'demo-3', categoryId:4,  title:'Video: Was sind eigentlich Gefühle?',     description:'Kurzes, kindgerechtes Erklärvideo über die Welt der Gefühle. Gut als Einstieg geeignet.',                                              type:'Video',           level:'Zyklus 1', url:'https://www.youtube.com/',          keywords:'Video, Gefühle, Einstieg, Animation',          emoji:'🎬' },
+  { id:'demo-4', categoryId:7,  title:'Atemübung: 5-4-3-2-1 zur Beruhigung',     description:'Eine einfache Achtsamkeitsübung, die in jeder Klasse spontan eingesetzt werden kann, wenn die Stimmung kippt.',                       type:'Unterrichtsidee', level:'alle',     url:'',                                  keywords:'Atmung, Achtsamkeit, Stress, Beruhigung',      emoji:'🌬️' },
+  { id:'demo-5', categoryId:3,  title:'No-Blame-Approach – Methodenpapier',      description:'Dokument zur lösungsorientierten Mobbing-Intervention ohne Schuldzuweisung. Mit Ablauf, Rollen und Praxistipps.',                     type:'Dokument',        level:'Zyklus 3', url:'https://www.no-blame-approach.de/', keywords:'Mobbing, Intervention, Methodik, Klassengespräch', emoji:'📄' },
+  { id:'demo-6', categoryId:13, title:'Anker-Übung für Prüfungssituationen',     description:'Kurze mentale Übung, mit der sich Jugendliche vor Tests innerlich sammeln können.',                                                  type:'Unterrichtsidee', level:'Sek II',   url:'',                                  keywords:'Achtsamkeit, Prüfung, Anker, Selbstregulation',emoji:'⚓' },
+  { id:'demo-7', categoryId:16, title:'Stärken-Baum gestalten',                  description:'Bastelidee: Jede Schülerin und jeder Schüler gestaltet einen eigenen Baum, dessen Blätter die persönlichen Stärken zeigen.',          type:'Unterrichtsidee', level:'Zyklus 2', url:'',                                  keywords:'Stärken, Bastel, Selbstbild, Klasse',          emoji:'🌳' },
+  { id:'demo-8', categoryId:15, title:'Whatsapp-Regeln gemeinsam erarbeiten',    description:'Ein Klassenprojekt: gemeinsam Regeln für die Klassenchat-Gruppe entwickeln. Mit Diskussions-Karten.',                                  type:'Unterrichtsidee', level:'Zyklus 3', url:'',                                  keywords:'Chat, Regeln, Mediennutzung, Vereinbarung',    emoji:'💬' }
 ];
 
-/* ----------- Daten laden / speichern ----------- */
 function loadItems() {
   const raw = localStorage.getItem(STORAGE_KEY);
   if (!raw) {
-    // beim ersten Aufruf: Beispieldaten setzen
     localStorage.setItem(STORAGE_KEY, JSON.stringify(SAMPLE_ITEMS));
     return [...SAMPLE_ITEMS];
   }
@@ -627,16 +668,18 @@ function loadItems() {
 
 let ITEMS = loadItems();
 
-/* ----------- Rendering der Kacheln ----------- */
-const tilesEl  = document.getElementById('tiles');
-const detailEl = document.getElementById('detail');
+const tilesEl       = document.getElementById('tiles');
+const detailEl      = document.getElementById('detail');
 const detailTitleEl = document.getElementById('detail-title');
 const detailCardsEl = document.getElementById('detail-cards');
 const detailCloseEl = document.getElementById('detail-close');
-const searchEl = document.getElementById('search');
+const searchEl      = document.getElementById('search');
+const resultsEl     = document.getElementById('search-results');
+const resultsTitleEl= document.getElementById('search-results-title');
+const resultsCardsEl= document.getElementById('search-results-cards');
+const searchClearEl = document.getElementById('search-clear');
 
 let activeCategoryId = null;
-let searchQuery = '';
 
 function countItems(categoryId) {
   return ITEMS.filter(it => Number(it.categoryId) === categoryId).length;
@@ -649,7 +692,6 @@ function renderTiles() {
     const isEmpty = n === 0;
     const btn = document.createElement('button');
     btn.className = 'tile' + (isEmpty ? ' empty' : '') + (activeCategoryId === cat.id ? ' active' : '');
-    btn.style.setProperty('--bg', `var(--cat-${cat.id}-bg)`);
     btn.innerHTML = `
       <div class="tile-top">
         <div class="tile-icon" style="background: var(--cat-${cat.id}-bg); color: var(--cat-${cat.id}-fg);">${cat.emoji}</div>
@@ -668,7 +710,7 @@ function renderTiles() {
   });
 }
 
-/* ----------- Karten in der Detailansicht ----------- */
+/* Detailansicht für eine angeklickte Kategorie */
 function renderDetail() {
   if (activeCategoryId === null) {
     detailEl.classList.remove('show');
@@ -687,20 +729,21 @@ function renderDetail() {
         Über den Admin-Bereich können Lehrpersonen Ideen, Links und Unterlagen ergänzen.
       </div>`;
   } else {
-    detailCardsEl.innerHTML = '<div class="cards">' + items.map(cardHTML).join('') + '</div>';
+    detailCardsEl.innerHTML = '<div class="cards">' + items.map(it => cardHTML(it, false)).join('') + '</div>';
   }
 
   detailEl.classList.add('show');
-  // sanftes Scrollen zum Detailbereich
   setTimeout(() => detailEl.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
 }
 
-function cardHTML(it) {
+function cardHTML(it, withCategoryHint = false) {
   const kw = (it.keywords || '').split(',').map(k => k.trim()).filter(Boolean);
   const hasLink = it.url && it.url.trim() !== '';
   const safeUrl = hasLink ? it.url : '#';
+  const cat = CATEGORIES.find(c => c.id === Number(it.categoryId));
   return `
     <article class="card">
+      ${withCategoryHint && cat ? `<div class="card-cat-hint">${cat.emoji} ${escapeHtml(cat.name)}</div>` : ''}
       <div class="card-meta">
         ${it.type  ? `<span class="tag type">${it.type}</span>` : ''}
         ${it.level ? `<span class="tag level">${it.level}</span>` : ''}
@@ -712,12 +755,11 @@ function cardHTML(it) {
         ? `<a class="open-btn" href="${escapeAttr(safeUrl)}" target="_blank" rel="noopener">Öffnen
              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
            </a>`
-        : `<span class="open-btn" style="opacity:.45;cursor:default">kein Link hinterlegt</span>`}
+        : `<span class="open-btn" style="opacity:.4;cursor:default;background:var(--ink-mute)">kein Link</span>`}
     </article>
   `;
 }
 
-/* Kategorie öffnen / schliessen */
 function openCategory(id) {
   activeCategoryId = (activeCategoryId === id) ? null : id;
   renderTiles();
@@ -731,29 +773,32 @@ detailCloseEl.addEventListener('click', () => {
 });
 
 /* ----------- Suche ----------- */
-searchEl.addEventListener('input', e => {
-  searchQuery = e.target.value.trim().toLowerCase();
-  if (!searchQuery) {
-    // bei leerem Suchfeld: alles wieder anzeigen
-    renderTiles();
-    if (activeCategoryId !== null) renderDetail();
+function performSearch(q) {
+  if (!q) {
+    resultsEl.classList.remove('show');
     return;
   }
-  // Suche durchführen: zeige nur Treffer in der Detailansicht (kategorieübergreifend)
-  const hits = ITEMS.filter(it => matchesSearch(it, searchQuery));
-  detailTitleEl.innerHTML = `<span class="emoji">🔎</span><span>Suchergebnisse für „${escapeHtml(searchQuery)}"</span>`;
+  const hits = ITEMS.filter(it => matchesSearch(it, q));
+  resultsTitleEl.innerHTML = hits.length
+    ? `${hits.length} ${hits.length === 1 ? 'Treffer' : 'Treffer'} für <strong>„${escapeHtml(q)}"</strong>`
+    : `Keine Treffer für <strong>„${escapeHtml(q)}"</strong>`;
   if (hits.length === 0) {
-    detailCardsEl.innerHTML = `
+    resultsCardsEl.innerHTML = `
       <div class="empty-msg">
         <span class="big">🤷</span>
-        Keine Inhalte gefunden.<br>Vielleicht andere Begriffe versuchen?
+        Keine Inhalte gefunden.<br>Vielleicht mit anderen Begriffen versuchen?
       </div>`;
   } else {
-    detailCardsEl.innerHTML = '<div class="cards">' + hits.map(cardHTML).join('') + '</div>';
+    resultsCardsEl.innerHTML = '<div class="cards">' + hits.map(it => cardHTML(it, true)).join('') + '</div>';
   }
-  detailEl.classList.add('show');
-  activeCategoryId = null;
-  renderTiles();
+  resultsEl.classList.add('show');
+}
+
+searchEl.addEventListener('input', e => performSearch(e.target.value.trim().toLowerCase()));
+searchClearEl.addEventListener('click', () => {
+  searchEl.value = '';
+  resultsEl.classList.remove('show');
+  searchEl.focus();
 });
 
 function matchesSearch(it, q) {
@@ -765,23 +810,22 @@ function matchesSearch(it, q) {
   return haystack.includes(q);
 }
 
-/* ----------- kleine Helfer ----------- */
 function escapeHtml(s) {
   return String(s ?? '').replace(/[&<>"']/g, m =>
     ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[m]));
 }
 function escapeAttr(s) { return escapeHtml(s); }
 
-/* ----------- Sync zwischen Tabs (z.B. wenn admin.html ändert) ----------- */
+/* Sync bei Änderungen aus anderem Tab (z. B. admin.html) */
 window.addEventListener('storage', e => {
   if (e.key === STORAGE_KEY) {
     ITEMS = loadItems();
     renderTiles();
     if (activeCategoryId !== null) renderDetail();
+    if (searchEl.value.trim()) performSearch(searchEl.value.trim().toLowerCase());
   }
 });
 
-/* ----------- los geht's ----------- */
 renderTiles();
 </script>
 
