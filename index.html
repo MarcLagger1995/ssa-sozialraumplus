@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SSA Sozialraumplus – Plattform für soziales Lernen, Gefühle und Gemeinschaft</title>
+
+<!-- Schriften: Fraunces (warme Serif für Headlines) + Inter Tight (klare Body-Schrift) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   SSA Sozialraumplus – Stylesheet
+   Aesthetic: warm, ruhig, freundlich, leicht handgezeichnet
+   ============================================================ */
+
+:root {
+  /* Farbpalette: warme Erdtöne mit sanftem Akzent */
+  --bg:           #faf6f0;
+  --bg-card:      #ffffff;
+  --bg-soft:      #f1ebe1;
+  --ink:          #2a2620;
+  --ink-soft:     #6b6359;
+  --ink-mute:     #9a9388;
+  --line:         #e6dccb;
+  --line-strong:  #d4c6ac;
+
+  /* Akzentfarben (passen zu den Kategorien) */
+  --accent:       #c8654a;   /* warmes Terrakotta */
+  --accent-2:     #5b8a72;   /* salbei-grün */
+  --accent-3:     #d4a256;   /* warmes Gelb */
+  --accent-4:     #7a8db3;   /* gedecktes Blau */
+
+  /* Kategoriefarben (jeweils paarweise: Hintergrund / Text) */
+  --cat-1-bg:  #fbe6da;  --cat-1-fg:  #a3472f;   /* Konflikt – warm rot */
+  --cat-2-bg:  #e2eedc;  --cat-2-fg:  #4b6f3f;   /* Gemeinschaft – grün */
+  --cat-3-bg:  #fcdcd3;  --cat-3-fg:  #a8443a;   /* Mobbing – rot */
+  --cat-4-bg:  #fff1cc;  --cat-4-fg:  #8a6420;   /* Gefühle – gelb */
+  --cat-5-bg:  #ece2f0;  --cat-5-fg:  #6b4d83;   /* Selbstwert – lavendel */
+  --cat-6-bg:  #d8ebe8;  --cat-6-fg:  #2f6a64;   /* Teamgeist – petrol */
+  --cat-7-bg:  #ffe1c9;  --cat-7-fg:  #985a26;   /* Stress – orange */
+  --cat-8-bg:  #dfe3f3;  --cat-8-fg:  #43528f;   /* Regeln – blau */
+  --cat-9-bg:  #e2eedc;  --cat-9-fg:  #4b6f3f;
+  --cat-10-bg: #fcdcd3;  --cat-10-fg: #a8443a;
+  --cat-11-bg: #dfe3f3;  --cat-11-fg: #43528f;
+  --cat-12-bg: #e2eedc;  --cat-12-fg: #4b6f3f;
+  --cat-13-bg: #ece2f0;  --cat-13-fg: #6b4d83;
+  --cat-14-bg: #d8ebe8;  --cat-14-fg: #2f6a64;
+  --cat-15-bg: #ffe1c9;  --cat-15-fg: #985a26;
+  --cat-16-bg: #fff1cc;  --cat-16-fg: #8a6420;
+
+  --radius:    18px;
+  --radius-lg: 26px;
+  --radius-sm: 12px;
+  --shadow:    0 1px 2px rgba(42,38,32,.04), 0 8px 24px -12px rgba(42,38,32,.12);
+  --shadow-lg: 0 20px 50px -20px rgba(42,38,32,.18);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter Tight', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--bg);
+  /* dezente Papierstruktur durch zwei radial-gradients */
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(200, 101, 74, .04) 0, transparent 40%),
+    radial-gradient(circle at 88% 92%, rgba(91, 138, 114, .05) 0, transparent 45%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------- Layout-Container ---------- */
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Header ---------- */
+header.site-header {
+  padding: 56px 0 24px;
+  position: relative;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+.brand-mark {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #fff;
+  display: grid; place-items: center;
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  box-shadow: var(--shadow);
+}
+.brand-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+}
+
+h1.site-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: clamp(38px, 5.5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin: 0 0 14px;
+  max-width: 880px;
+}
+h1.site-title em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.site-sub {
+  font-size: clamp(17px, 1.4vw, 20px);
+  color: var(--ink-soft);
+  max-width: 720px;
+  margin: 0 0 28px;
+  font-weight: 400;
+}
+
+.intro {
+  max-width: 760px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  border-left: 3px solid var(--line-strong);
+  padding: 6px 0 6px 22px;
+  margin: 0 0 48px;
+}
+.intro p { margin: 0 0 12px; }
+.intro p:last-child { margin-bottom: 0; }
+
+/* ---------- Suche ---------- */
+.search-wrap {
+  position: relative;
+  max-width: 540px;
+  margin: 0 0 56px;
+}
+.search-wrap svg.icon {
+  position: absolute;
+  left: 18px; top: 50%;
+  transform: translateY(-50%);
+  width: 18px; height: 18px;
+  color: var(--ink-mute);
+  pointer-events: none;
+}
+input.search {
+  width: 100%;
+  padding: 16px 18px 16px 48px;
+  font: inherit;
+  font-size: 16px;
+  border: 1.5px solid var(--line);
+  background: var(--bg-card);
+  border-radius: 999px;
+  outline: none;
+  color: var(--ink);
+  transition: border-color .15s ease, box-shadow .15s ease;
+  box-shadow: var(--shadow);
+}
+input.search:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(200, 101, 74, .12), var(--shadow);
+}
+input.search::placeholder { color: var(--ink-mute); }
+
+/* ---------- Kategorie-Kacheln ---------- */
+.section-label {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--ink-mute);
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+  margin: 0 0 16px;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 64px;
+}
+
+.tile {
+  position: relative;
+  text-align: left;
+  cursor: pointer;
+  padding: 22px 20px 20px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--line);
+  background: var(--bg-card);
+  font: inherit;
+  color: var(--ink);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  overflow: hidden;
+  min-height: 138px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.tile:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--line-strong);
+}
+.tile.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(200, 101, 74, .14), var(--shadow-lg);
+}
+
+.tile-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.tile-icon {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  display: grid; place-items: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  background: var(--bg-soft);
+}
+.tile-number {
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-mute);
+  font-feature-settings: 'tnum';
+}
+.tile-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0 0 10px;
+}
+.tile-count {
+  font-size: 13px;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tile-count .dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.tile.empty .tile-count .dot { background: var(--ink-mute); opacity: .4; }
+
+/* ---------- Detail-Bereich ---------- */
+.detail {
+  margin: 0 0 64px;
+  padding: 36px 32px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--line);
+  display: none;
+  animation: slideIn .3s ease;
+}
+.detail.show { display: block; }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.detail-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.detail-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.detail-title .emoji { font-size: 32px; }
+.detail-close {
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.detail-close:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  background: var(--bg-soft);
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  transition: border-color .15s, transform .15s;
+}
+.card:hover { border-color: var(--line-strong); }
+
+.card-meta {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: rgba(255,255,255,.7);
+  color: var(--ink-soft);
+}
+.tag.type    { background: var(--ink); color: var(--bg); }
+.tag.level   { background: rgba(255,255,255,.9); border: 1px solid var(--line-strong); }
+
+.card-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0 0 8px;
+}
+.card-desc {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0 0 16px;
+  flex-grow: 1;
+}
+.card-keywords {
+  font-size: 12px;
+  color: var(--ink-mute);
+  margin-bottom: 14px;
+  font-style: italic;
+}
+.card-keywords span { margin-right: 8px; }
+
+.card a.open-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 9px 18px;
+  background: var(--ink);
+  color: var(--bg);
+  text-decoration: none;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background .15s, transform .15s;
+}
+.card a.open-btn:hover {
+  background: var(--accent);
+  transform: translateX(2px);
+}
+.card a.open-btn svg { width: 14px; height: 14px; }
+
+.empty-msg {
+  padding: 36px 24px;
+  text-align: center;
+  color: var(--ink-soft);
+  background: var(--bg-soft);
+  border-radius: var(--radius);
+  font-style: italic;
+}
+.empty-msg .big {
+  font-size: 28px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* ---------- Footer ---------- */
+footer.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 36px 0 56px;
+  margin-top: 32px;
+  font-size: 13px;
+  color: var(--ink-mute);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+footer a {
+  color: var(--ink-mute);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--ink-mute);
+  transition: color .15s;
+}
+footer a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  header.site-header { padding: 36px 0 12px; }
+  .intro { padding-left: 16px; }
+  .detail { padding: 24px 20px; }
+  .tiles { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+  .tile { padding: 18px 16px 16px; min-height: 124px; }
+  .tile-title { font-size: 15px; }
+  footer.site-footer { padding: 28px 0 36px; flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- =================== HEADER =================== -->
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand-mark">S+</div>
+      <div class="brand-name">SSA Sozialraumplus</div>
+    </div>
+
+    <h1 class="site-title">Soziales Lernen, <em>Gefühle</em> und Gemeinschaft.</h1>
+    <p class="site-sub">Eine Plattform der Schulsozialarbeit Oberwallis für Lehrpersonen.</p>
+
+    <div class="intro">
+      <p>SSA Sozialraumplus ist eine von der Schulsozialarbeit Oberwallis entwickelte Onlineplattform für Lehrpersonen. Sie bündelt auf einer einzigen Seite vielfältige Impulse, Unterrichtsideen, Videos, Links und Unterlagen rund um soziales Lernen, Selbstkompetenzen und das gemeinsame Miteinander in der Klasse.</p>
+      <p>Ziel der Plattform ist es, Lehrpersonen einfach, schnell und alltagsnah bei der Förderung sozialer und persönlicher Kompetenzen von Kindern und Jugendlichen zu unterstützen. Bei Bedarf steht zudem die Schulsozialarbeit Oberwallis für fachlichen Austausch, Reflexion oder Zusammenarbeit unterstützend zur Seite.</p>
+    </div>
+
+    <!-- Suche -->
+    <div class="search-wrap">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input class="search" id="search" type="text" placeholder="Suche nach Kategorie, Titel, Schlagwort …" autocomplete="off" />
+    </div>
+  </header>
+
+  <!-- =================== KATEGORIEN =================== -->
+  <p class="section-label">— Sechzehn Themen</p>
+  <div class="tiles" id="tiles"></div>
+
+  <!-- =================== DETAILBEREICH =================== -->
+  <section class="detail" id="detail" aria-live="polite">
+    <div class="detail-head">
+      <h2 class="detail-title" id="detail-title"></h2>
+      <button class="detail-close" id="detail-close">Schliessen ×</button>
+    </div>
+    <div id="detail-cards"></div>
+  </section>
+
+  <!-- =================== FOOTER =================== -->
+  <footer class="site-footer">
+    <div>© Schulsozialarbeit Oberwallis · SSA Sozialraumplus</div>
+    <div><a href="admin.html">Administration</a></div>
+  </footer>
+
+</div>
+
+<script>
+/* ============================================================
+   SSA Sozialraumplus – Logik
+   Daten werden im localStorage gespeichert (Key: SSA_DATA_V1).
+   Wenn keine Daten vorhanden sind, werden Beispieldaten geladen.
+   ============================================================ */
+
+const STORAGE_KEY = 'SSA_DATA_V1';
+
+/* Die 16 Kategorien – feste Reihenfolge, mit Emoji und Farbe */
+const CATEGORIES = [
+  { id: 1,  name: 'Konfliktlösung und Kommunikation',         emoji: '💬' },
+  { id: 2,  name: 'Klassengemeinschaft und Klassenklima',     emoji: '🤝' },
+  { id: 3,  name: 'Mobbing und Ausgrenzung',                  emoji: '🛡️' },
+  { id: 4,  name: 'Gefühle wahrnehmen und ausdrücken',        emoji: '😊' },
+  { id: 5,  name: 'Selbstwert und Selbstvertrauen',           emoji: '💗' },
+  { id: 6,  name: 'Zusammenarbeit und Teamgeist',             emoji: '🧩' },
+  { id: 7,  name: 'Umgang mit Stress und Emotionen',          emoji: '🌿' },
+  { id: 8,  name: 'Regeln, Grenzen und Fairness',             emoji: '⚖️' },
+  { id: 9,  name: 'Integration in der Klasse',                emoji: '🌍' },
+  { id: 10, name: 'Frustrationstoleranz und Resilienz',       emoji: '🪨' },
+  { id: 11, name: 'Vielfalt, Respekt und Empathie',           emoji: '💜' },
+  { id: 12, name: 'Eigenverantwortung und Motivation',        emoji: '🎯' },
+  { id: 13, name: 'Selbstregulation und Achtsamkeit',         emoji: '🧘' },
+  { id: 14, name: 'Umgang mit Fehlern und Leistungsdruck',    emoji: '✅' },
+  { id: 15, name: 'Digitale Kommunikation und soziale Medien',emoji: '📱' },
+  { id: 16, name: 'Eigene Stärken entdecken',                 emoji: '⭐' }
+];
+
+/* Beispiel-Inhalte (nur beim allerersten Aufruf) */
+const SAMPLE_ITEMS = [
+  {
+    id: 'demo-1',
+    categoryId: 1,
+    title: 'Streitschlichter-Karten für die Klasse',
+    description: 'Ein Set von Gesprächskarten, das Schülerinnen und Schülern hilft, einen Streit Schritt für Schritt selbstständig zu lösen.',
+    type: 'Vorlage',
+    level: 'Zyklus 2',
+    url: 'https://www.schulsozialarbeit.ch/',
+    keywords: 'Streit, Schlichtung, Karten, Gesprächsführung',
+    emoji: '🃏'
+  },
+  {
+    id: 'demo-2',
+    categoryId: 2,
+    title: 'Morgenkreis – Ideen für die Woche',
+    description: 'Zehn schnelle Impulse für den Morgenkreis: kurze Übungen, die das Wir-Gefühl stärken.',
+    type: 'Unterrichtsidee',
+    level: 'Zyklus 1',
+    url: '',
+    keywords: 'Morgenkreis, Ritual, Wir-Gefühl, Klassenrat',
+    emoji: '🌅'
+  },
+  {
+    id: 'demo-3',
+    categoryId: 4,
+    title: 'Video: Was sind eigentlich Gefühle?',
+    description: 'Kurzes, kindgerechtes Erklärvideo über die Welt der Gefühle. Gut als Einstieg geeignet.',
+    type: 'Video',
+    level: 'Zyklus 1',
+    url: 'https://www.youtube.com/',
+    keywords: 'Video, Gefühle, Einstieg, Animation',
+    emoji: '🎬'
+  },
+  {
+    id: 'demo-4',
+    categoryId: 7,
+    title: 'Atemübung: 5-4-3-2-1 zur Beruhigung',
+    description: 'Eine einfache Achtsamkeitsübung, die in jeder Klasse spontan eingesetzt werden kann, wenn die Stimmung kippt.',
+    type: 'Unterrichtsidee',
+    level: 'alle',
+    url: '',
+    keywords: 'Atmung, Achtsamkeit, Stress, Beruhigung',
+    emoji: '🌬️'
+  },
+  {
+    id: 'demo-5',
+    categoryId: 3,
+    title: 'No-Blame-Approach – Methodenpapier',
+    description: 'Dokument zur lösungsorientierten Mobbing-Intervention ohne Schuldzuweisung. Mit Ablauf, Rollen und Praxistipps.',
+    type: 'Dokument',
+    level: 'Zyklus 3',
+    url: 'https://www.no-blame-approach.de/',
+    keywords: 'Mobbing, Intervention, Methodik, Klassengespräch',
+    emoji: '📄'
+  },
+  {
+    id: 'demo-6',
+    categoryId: 13,
+    title: 'Anker-Übung für Prüfungssituationen',
+    description: 'Kurze mentale Übung, mit der sich Jugendliche vor Tests innerlich sammeln können.',
+    type: 'Unterrichtsidee',
+    level: 'Sek II',
+    url: '',
+    keywords: 'Achtsamkeit, Prüfung, Anker, Selbstregulation',
+    emoji: '⚓'
+  },
+  {
+    id: 'demo-7',
+    categoryId: 16,
+    title: 'Stärken-Baum gestalten',
+    description: 'Bastelidee: Jede Schülerin und jeder Schüler gestaltet einen eigenen Baum, dessen Blätter die persönlichen Stärken zeigen.',
+    type: 'Unterrichtsidee',
+    level: 'Zyklus 2',
+    url: '',
+    keywords: 'Stärken, Bastel, Selbstbild, Klasse',
+    emoji: '🌳'
+  },
+  {
+    id: 'demo-8',
+    categoryId: 15,
+    title: 'Whatsapp-Regeln gemeinsam erarbeiten',
+    description: 'Ein Klassenprojekt: gemeinsam Regeln für die Klassenchat-Gruppe entwickeln. Mit Diskussions-Karten.',
+    type: 'Unterrichtsidee',
+    level: 'Zyklus 3',
+    url: '',
+    keywords: 'Chat, Regeln, Mediennutzung, Vereinbarung',
+    emoji: '💬'
+  }
+];
+
+/* ----------- Daten laden / speichern ----------- */
+function loadItems() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) {
+    // beim ersten Aufruf: Beispieldaten setzen
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(SAMPLE_ITEMS));
+    return [...SAMPLE_ITEMS];
+  }
+  try { return JSON.parse(raw); } catch { return []; }
+}
+
+let ITEMS = loadItems();
+
+/* ----------- Rendering der Kacheln ----------- */
+const tilesEl  = document.getElementById('tiles');
+const detailEl = document.getElementById('detail');
+const detailTitleEl = document.getElementById('detail-title');
+const detailCardsEl = document.getElementById('detail-cards');
+const detailCloseEl = document.getElementById('detail-close');
+const searchEl = document.getElementById('search');
+
+let activeCategoryId = null;
+let searchQuery = '';
+
+function countItems(categoryId) {
+  return ITEMS.filter(it => Number(it.categoryId) === categoryId).length;
+}
+
+function renderTiles() {
+  tilesEl.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const n = countItems(cat.id);
+    const isEmpty = n === 0;
+    const btn = document.createElement('button');
+    btn.className = 'tile' + (isEmpty ? ' empty' : '') + (activeCategoryId === cat.id ? ' active' : '');
+    btn.style.setProperty('--bg', `var(--cat-${cat.id}-bg)`);
+    btn.innerHTML = `
+      <div class="tile-top">
+        <div class="tile-icon" style="background: var(--cat-${cat.id}-bg); color: var(--cat-${cat.id}-fg);">${cat.emoji}</div>
+        <div class="tile-number">${String(cat.id).padStart(2,'0')}</div>
+      </div>
+      <div>
+        <h3 class="tile-title">${cat.name}</h3>
+        <div class="tile-count">
+          <span class="dot"></span>
+          ${n} ${n === 1 ? 'Inhalt' : 'Inhalte'}
+        </div>
+      </div>
+    `;
+    btn.addEventListener('click', () => openCategory(cat.id));
+    tilesEl.appendChild(btn);
+  });
+}
+
+/* ----------- Karten in der Detailansicht ----------- */
+function renderDetail() {
+  if (activeCategoryId === null) {
+    detailEl.classList.remove('show');
+    return;
+  }
+  const cat = CATEGORIES.find(c => c.id === activeCategoryId);
+  const items = ITEMS.filter(it => Number(it.categoryId) === activeCategoryId);
+
+  detailTitleEl.innerHTML = `<span class="emoji">${cat.emoji}</span><span>${cat.name}</span>`;
+
+  if (items.length === 0) {
+    detailCardsEl.innerHTML = `
+      <div class="empty-msg">
+        <span class="big">🌱</span>
+        Hier sind noch keine Inhalte hinterlegt.<br>
+        Über den Admin-Bereich können Lehrpersonen Ideen, Links und Unterlagen ergänzen.
+      </div>`;
+  } else {
+    detailCardsEl.innerHTML = '<div class="cards">' + items.map(cardHTML).join('') + '</div>';
+  }
+
+  detailEl.classList.add('show');
+  // sanftes Scrollen zum Detailbereich
+  setTimeout(() => detailEl.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+}
+
+function cardHTML(it) {
+  const kw = (it.keywords || '').split(',').map(k => k.trim()).filter(Boolean);
+  const hasLink = it.url && it.url.trim() !== '';
+  const safeUrl = hasLink ? it.url : '#';
+  return `
+    <article class="card">
+      <div class="card-meta">
+        ${it.type  ? `<span class="tag type">${it.type}</span>` : ''}
+        ${it.level ? `<span class="tag level">${it.level}</span>` : ''}
+      </div>
+      <h3 class="card-title">${it.emoji ? it.emoji + ' ' : ''}${escapeHtml(it.title)}</h3>
+      <p class="card-desc">${escapeHtml(it.description || '')}</p>
+      ${kw.length ? `<div class="card-keywords">${kw.map(k=>`<span>#${escapeHtml(k)}</span>`).join('')}</div>` : ''}
+      ${hasLink
+        ? `<a class="open-btn" href="${escapeAttr(safeUrl)}" target="_blank" rel="noopener">Öffnen
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+           </a>`
+        : `<span class="open-btn" style="opacity:.45;cursor:default">kein Link hinterlegt</span>`}
+    </article>
+  `;
+}
+
+/* Kategorie öffnen / schliessen */
+function openCategory(id) {
+  activeCategoryId = (activeCategoryId === id) ? null : id;
+  renderTiles();
+  renderDetail();
+}
+
+detailCloseEl.addEventListener('click', () => {
+  activeCategoryId = null;
+  renderTiles();
+  detailEl.classList.remove('show');
+});
+
+/* ----------- Suche ----------- */
+searchEl.addEventListener('input', e => {
+  searchQuery = e.target.value.trim().toLowerCase();
+  if (!searchQuery) {
+    // bei leerem Suchfeld: alles wieder anzeigen
+    renderTiles();
+    if (activeCategoryId !== null) renderDetail();
+    return;
+  }
+  // Suche durchführen: zeige nur Treffer in der Detailansicht (kategorieübergreifend)
+  const hits = ITEMS.filter(it => matchesSearch(it, searchQuery));
+  detailTitleEl.innerHTML = `<span class="emoji">🔎</span><span>Suchergebnisse für „${escapeHtml(searchQuery)}"</span>`;
+  if (hits.length === 0) {
+    detailCardsEl.innerHTML = `
+      <div class="empty-msg">
+        <span class="big">🤷</span>
+        Keine Inhalte gefunden.<br>Vielleicht andere Begriffe versuchen?
+      </div>`;
+  } else {
+    detailCardsEl.innerHTML = '<div class="cards">' + hits.map(cardHTML).join('') + '</div>';
+  }
+  detailEl.classList.add('show');
+  activeCategoryId = null;
+  renderTiles();
+});
+
+function matchesSearch(it, q) {
+  const cat = CATEGORIES.find(c => c.id === Number(it.categoryId));
+  const haystack = [
+    it.title, it.description, it.keywords, it.type, it.level,
+    cat ? cat.name : ''
+  ].join(' ').toLowerCase();
+  return haystack.includes(q);
+}
+
+/* ----------- kleine Helfer ----------- */
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, m =>
+    ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[m]));
+}
+function escapeAttr(s) { return escapeHtml(s); }
+
+/* ----------- Sync zwischen Tabs (z.B. wenn admin.html ändert) ----------- */
+window.addEventListener('storage', e => {
+  if (e.key === STORAGE_KEY) {
+    ITEMS = loadItems();
+    renderTiles();
+    if (activeCategoryId !== null) renderDetail();
+  }
+});
+
+/* ----------- los geht's ----------- */
+renderTiles();
+</script>
+
+</body>
+</html>

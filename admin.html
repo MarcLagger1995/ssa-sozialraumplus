@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SSA Sozialraumplus – Administration</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   SSA Sozialraumplus – Admin Stylesheet
+   ============================================================ */
+
+:root {
+  --bg:           #faf6f0;
+  --bg-card:      #ffffff;
+  --bg-soft:      #f1ebe1;
+  --ink:          #2a2620;
+  --ink-soft:     #6b6359;
+  --ink-mute:     #9a9388;
+  --line:         #e6dccb;
+  --line-strong:  #d4c6ac;
+  --accent:       #c8654a;
+  --accent-dark:  #a3472f;
+  --danger:       #b04438;
+  --success:      #5b8a72;
+
+  --radius:    18px;
+  --radius-lg: 26px;
+  --radius-sm: 10px;
+  --shadow:    0 1px 2px rgba(42,38,32,.04), 0 8px 24px -12px rgba(42,38,32,.12);
+  --shadow-lg: 0 20px 50px -20px rgba(42,38,32,.18);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter Tight', system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--bg);
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(200, 101, 74, .04) 0, transparent 40%),
+    radial-gradient(circle at 88% 92%, rgba(91, 138, 114, .05) 0, transparent 45%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Header ---------- */
+header.admin-header {
+  padding: 36px 0 24px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 32px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.brand-mark {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #fff;
+  display: grid; place-items: center;
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  box-shadow: var(--shadow);
+}
+.brand-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+}
+h1.admin-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 6px;
+}
+.admin-sub {
+  color: var(--ink-soft);
+  margin: 0;
+}
+.admin-sub a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--accent);
+}
+
+/* ---------- Login ---------- */
+.login-wrap {
+  max-width: 420px;
+  margin: 80px auto;
+  padding: 36px 32px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--line);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+.login-wrap h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 24px;
+  margin: 0 0 8px;
+}
+.login-wrap p { color: var(--ink-soft); margin: 0 0 24px; font-size: 14px; }
+.login-wrap input {
+  width: 100%;
+  padding: 14px 16px;
+  font: inherit;
+  font-size: 16px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  text-align: center;
+  margin-bottom: 12px;
+  outline: none;
+}
+.login-wrap input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(200,101,74,.12);
+}
+.login-error {
+  color: var(--danger);
+  font-size: 13px;
+  min-height: 20px;
+  margin-bottom: 6px;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s, transform .1s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(.97); }
+
+.btn-primary { background: var(--ink); color: #fff; }
+.btn-primary:hover { background: var(--accent); }
+
+.btn-secondary { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.btn-secondary:hover { background: var(--bg-soft); border-color: var(--ink); }
+
+.btn-danger { background: transparent; color: var(--danger); border-color: var(--danger); }
+.btn-danger:hover { background: var(--danger); color: #fff; }
+
+.btn-ghost { background: transparent; color: var(--ink-soft); }
+.btn-ghost:hover { color: var(--ink); }
+
+/* ---------- Toolbar ---------- */
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.toolbar-left, .toolbar-right {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.toolbar h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 22px;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Inhaltsliste ---------- */
+.items {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 64px;
+}
+.item-row {
+  background: var(--bg-card);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: center;
+  transition: border-color .15s;
+}
+.item-row:hover { border-color: var(--line-strong); }
+.item-main { min-width: 0; }
+.item-title {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
+.item-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+.item-meta .badge {
+  background: var(--bg-soft);
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+}
+.item-meta .badge.type  { background: var(--ink); color: var(--bg); }
+.item-desc {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.item-actions { display: flex; gap: 6px; }
+
+.empty-list {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--ink-soft);
+  background: var(--bg-card);
+  border: 1.5px dashed var(--line-strong);
+  border-radius: var(--radius);
+  font-style: italic;
+}
+
+/* ---------- Modal (Formular) ---------- */
+.modal-bg {
+  position: fixed; inset: 0;
+  background: rgba(42,38,32,.4);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+  z-index: 100;
+  overflow-y: auto;
+  animation: fadeIn .15s ease;
+}
+.modal-bg.show { display: flex; }
+@keyframes fadeIn { from {opacity:0} to {opacity:1} }
+
+.modal {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 620px;
+  padding: 32px;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp .2s ease;
+}
+@keyframes slideUp {
+  from {opacity:0; transform: translateY(12px)}
+  to   {opacity:1; transform: translateY(0)}
+}
+
+.modal h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 24px;
+  margin: 0 0 24px;
+  letter-spacing: -0.01em;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field.full { grid-column: 1 / -1; }
+.field label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.field input,
+.field select,
+.field textarea {
+  font: inherit;
+  font-size: 15px;
+  padding: 11px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  outline: none;
+  color: var(--ink);
+  transition: border-color .15s, box-shadow .15s;
+}
+.field textarea { min-height: 90px; resize: vertical; font-family: inherit; }
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--accent);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(200,101,74,.1);
+}
+.field .hint {
+  font-size: 12px;
+  color: var(--ink-mute);
+  font-style: italic;
+}
+
+.upload-hint {
+  background: #fef9ec;
+  border: 1px solid #f0e3b8;
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 13px;
+  color: #8a6420;
+  margin-top: 4px;
+  grid-column: 1 / -1;
+}
+.upload-hint strong { font-weight: 600; }
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.modal-actions-right { display: flex; gap: 8px; }
+
+/* ---------- Toast / Hinweis ---------- */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s, transform .25s;
+  z-index: 200;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(-4px); }
+.toast.success { background: var(--success); }
+.toast.error   { background: var(--danger); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .modal { padding: 24px 20px; }
+  .item-row { grid-template-columns: 1fr; }
+  .item-actions { justify-content: flex-start; }
+  h1.admin-title { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- =================== LOGIN-SCREEN =================== -->
+<div id="login-screen" class="login-wrap">
+  <div class="brand" style="justify-content: center; margin-bottom: 24px;">
+    <div class="brand-mark">S+</div>
+  </div>
+  <h2>Administration</h2>
+  <p>Bitte Passwort eingeben, um Inhalte zu pflegen.</p>
+  <input type="password" id="login-input" placeholder="Passwort" autocomplete="off" />
+  <div class="login-error" id="login-error"></div>
+  <button class="btn btn-primary" id="login-btn" style="width: 100%; justify-content: center;">Anmelden</button>
+  <div style="margin-top: 18px; font-size: 13px;">
+    <a href="index.html" style="color: var(--ink-mute); text-decoration: none;">← zurück zur Übersicht</a>
+  </div>
+</div>
+
+<!-- =================== ADMIN-OBERFLÄCHE =================== -->
+<div id="admin-screen" style="display: none;">
+  <div class="container">
+
+    <header class="admin-header">
+      <div class="brand">
+        <div class="brand-mark">S+</div>
+        <div class="brand-name">SSA Sozialraumplus</div>
+      </div>
+      <h1 class="admin-title">Administration</h1>
+      <p class="admin-sub">Inhalte erfassen, bearbeiten und löschen. <a href="index.html">→ zur öffentlichen Übersicht</a></p>
+    </header>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <h2 id="count-label">Inhalte</h2>
+      </div>
+      <div class="toolbar-right">
+        <button class="btn btn-secondary" id="export-btn">⤓ Export JSON</button>
+        <button class="btn btn-secondary" id="import-btn">⤒ Import JSON</button>
+        <input type="file" id="import-file" accept="application/json" style="display:none" />
+        <button class="btn btn-primary" id="new-btn">+ Neuer Inhalt</button>
+        <button class="btn btn-ghost" id="logout-btn">Abmelden</button>
+      </div>
+    </div>
+
+    <!-- Filter nach Kategorie -->
+    <div style="margin-bottom: 20px;">
+      <select id="filter-cat" class="btn btn-secondary" style="padding: 9px 16px; cursor: pointer;">
+        <option value="">Alle Kategorien</option>
+      </select>
+    </div>
+
+    <!-- Liste der Inhalte -->
+    <div class="items" id="items"></div>
+
+  </div>
+</div>
+
+<!-- =================== FORMULAR-MODAL =================== -->
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <h3 id="modal-title">Neuer Inhalt</h3>
+    <form id="form" autocomplete="off">
+      <input type="hidden" id="f-id" />
+
+      <div class="form-grid">
+        <div class="field full">
+          <label for="f-title">Titel *</label>
+          <input type="text" id="f-title" required placeholder="z. B. Streitschlichter-Karten" />
+        </div>
+
+        <div class="field">
+          <label for="f-category">Kategorie *</label>
+          <select id="f-category" required></select>
+        </div>
+
+        <div class="field">
+          <label for="f-type">Typ</label>
+          <select id="f-type">
+            <option>Dokument</option>
+            <option>Video</option>
+            <option>Link</option>
+            <option>Unterrichtsidee</option>
+            <option>Vorlage</option>
+            <option>Sonstiges</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="f-level">Zielstufe</label>
+          <select id="f-level">
+            <option>Zyklus 1</option>
+            <option>Zyklus 2</option>
+            <option>Zyklus 3</option>
+            <option>Sek II</option>
+            <option>alle</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="f-emoji">Icon / Emoji <span class="hint">(optional)</span></label>
+          <input type="text" id="f-emoji" maxlength="4" placeholder="z. B. 🌳" />
+        </div>
+
+        <div class="field full">
+          <label for="f-desc">Kurzbeschreibung</label>
+          <textarea id="f-desc" placeholder="In wenigen Sätzen: Worum geht es?"></textarea>
+        </div>
+
+        <div class="field full">
+          <label for="f-url">Link oder Datei-URL</label>
+          <input type="url" id="f-url" placeholder="https://…" />
+        </div>
+
+        <div class="field full">
+          <label for="f-keywords">Schlagwörter <span class="hint">(durch Komma getrennt)</span></label>
+          <input type="text" id="f-keywords" placeholder="z. B. Mobbing, Klassengespräch, Methode" />
+        </div>
+
+        <div class="upload-hint">
+          <strong>Hinweis:</strong> Dateien können extern hochgeladen werden (z. B. auf Dropbox, Google Drive, OneDrive, Schul-Cloud). Danach den entstehenden Link einfach hier einfügen.
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <div>
+          <button type="button" class="btn btn-danger" id="delete-btn" style="display:none">🗑 Löschen</button>
+        </div>
+        <div class="modal-actions-right">
+          <button type="button" class="btn btn-secondary" id="cancel-btn">Abbrechen</button>
+          <button type="submit" class="btn btn-primary">Speichern</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- =================== TOAST =================== -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   SSA Sozialraumplus – Admin-Logik
+   Verwendet denselben localStorage-Key wie index.html.
+   ============================================================ */
+
+const STORAGE_KEY = 'SSA_DATA_V1';
+const ADMIN_PASSWORD = 'ssa-admin'; // Passwort für den Adminbereich
+
+const CATEGORIES = [
+  { id: 1,  name: 'Konfliktlösung und Kommunikation',         emoji: '💬' },
+  { id: 2,  name: 'Klassengemeinschaft und Klassenklima',     emoji: '🤝' },
+  { id: 3,  name: 'Mobbing und Ausgrenzung',                  emoji: '🛡️' },
+  { id: 4,  name: 'Gefühle wahrnehmen und ausdrücken',        emoji: '😊' },
+  { id: 5,  name: 'Selbstwert und Selbstvertrauen',           emoji: '💗' },
+  { id: 6,  name: 'Zusammenarbeit und Teamgeist',             emoji: '🧩' },
+  { id: 7,  name: 'Umgang mit Stress und Emotionen',          emoji: '🌿' },
+  { id: 8,  name: 'Regeln, Grenzen und Fairness',             emoji: '⚖️' },
+  { id: 9,  name: 'Integration in der Klasse',                emoji: '🌍' },
+  { id: 10, name: 'Frustrationstoleranz und Resilienz',       emoji: '🪨' },
+  { id: 11, name: 'Vielfalt, Respekt und Empathie',           emoji: '💜' },
+  { id: 12, name: 'Eigenverantwortung und Motivation',        emoji: '🎯' },
+  { id: 13, name: 'Selbstregulation und Achtsamkeit',         emoji: '🧘' },
+  { id: 14, name: 'Umgang mit Fehlern und Leistungsdruck',    emoji: '✅' },
+  { id: 15, name: 'Digitale Kommunikation und soziale Medien',emoji: '📱' },
+  { id: 16, name: 'Eigene Stärken entdecken',                 emoji: '⭐' }
+];
+
+/* Beispiel-Inhalte – nur falls localStorage noch leer ist */
+const SAMPLE_ITEMS = [
+  { id:'demo-1', categoryId:1,  title:'Streitschlichter-Karten für die Klasse', description:'Ein Set von Gesprächskarten, das Schülerinnen und Schülern hilft, einen Streit Schritt für Schritt selbstständig zu lösen.', type:'Vorlage',          level:'Zyklus 2', url:'https://www.schulsozialarbeit.ch/', keywords:'Streit, Schlichtung, Karten, Gesprächsführung', emoji:'🃏' },
+  { id:'demo-2', categoryId:2,  title:'Morgenkreis – Ideen für die Woche',       description:'Zehn schnelle Impulse für den Morgenkreis: kurze Übungen, die das Wir-Gefühl stärken.',                                                  type:'Unterrichtsidee',  level:'Zyklus 1', url:'',                                  keywords:'Morgenkreis, Ritual, Wir-Gefühl, Klassenrat',  emoji:'🌅' },
+  { id:'demo-3', categoryId:4,  title:'Video: Was sind eigentlich Gefühle?',     description:'Kurzes, kindgerechtes Erklärvideo über die Welt der Gefühle. Gut als Einstieg geeignet.',                                              type:'Video',            level:'Zyklus 1', url:'https://www.youtube.com/',          keywords:'Video, Gefühle, Einstieg, Animation',          emoji:'🎬' },
+  { id:'demo-4', categoryId:7,  title:'Atemübung: 5-4-3-2-1 zur Beruhigung',     description:'Eine einfache Achtsamkeitsübung, die in jeder Klasse spontan eingesetzt werden kann, wenn die Stimmung kippt.',                       type:'Unterrichtsidee',  level:'alle',     url:'',                                  keywords:'Atmung, Achtsamkeit, Stress, Beruhigung',      emoji:'🌬️' },
+  { id:'demo-5', categoryId:3,  title:'No-Blame-Approach – Methodenpapier',      description:'Dokument zur lösungsorientierten Mobbing-Intervention ohne Schuldzuweisung. Mit Ablauf, Rollen und Praxistipps.',                     type:'Dokument',         level:'Zyklus 3', url:'https://www.no-blame-approach.de/', keywords:'Mobbing, Intervention, Methodik, Klassengespräch', emoji:'📄' },
+  { id:'demo-6', categoryId:13, title:'Anker-Übung für Prüfungssituationen',     description:'Kurze mentale Übung, mit der sich Jugendliche vor Tests innerlich sammeln können.',                                                  type:'Unterrichtsidee',  level:'Sek II',   url:'',                                  keywords:'Achtsamkeit, Prüfung, Anker, Selbstregulation',emoji:'⚓' },
+  { id:'demo-7', categoryId:16, title:'Stärken-Baum gestalten',                  description:'Bastelidee: Jede Schülerin und jeder Schüler gestaltet einen eigenen Baum, dessen Blätter die persönlichen Stärken zeigen.',          type:'Unterrichtsidee',  level:'Zyklus 2', url:'',                                  keywords:'Stärken, Bastel, Selbstbild, Klasse',          emoji:'🌳' },
+  { id:'demo-8', categoryId:15, title:'Whatsapp-Regeln gemeinsam erarbeiten',    description:'Ein Klassenprojekt: gemeinsam Regeln für die Klassenchat-Gruppe entwickeln. Mit Diskussions-Karten.',                                  type:'Unterrichtsidee',  level:'Zyklus 3', url:'',                                  keywords:'Chat, Regeln, Mediennutzung, Vereinbarung',    emoji:'💬' }
+];
+
+/* ----------- Daten laden / speichern ----------- */
+function loadItems() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(SAMPLE_ITEMS));
+    return [...SAMPLE_ITEMS];
+  }
+  try { return JSON.parse(raw); } catch { return []; }
+}
+function saveItems(items) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+}
+let ITEMS = loadItems();
+let currentFilter = '';  // leer = alle Kategorien
+
+/* ----------- LOGIN ----------- */
+const loginScreen = document.getElementById('login-screen');
+const adminScreen = document.getElementById('admin-screen');
+const loginInput  = document.getElementById('login-input');
+const loginBtn    = document.getElementById('login-btn');
+const loginError  = document.getElementById('login-error');
+
+function tryLogin() {
+  if (loginInput.value === ADMIN_PASSWORD) {
+    sessionStorage.setItem('SSA_AUTH', '1');
+    showAdmin();
+  } else {
+    loginError.textContent = 'Passwort nicht korrekt.';
+    loginInput.value = '';
+    loginInput.focus();
+  }
+}
+loginBtn.addEventListener('click', tryLogin);
+loginInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
+
+function showAdmin() {
+  loginScreen.style.display = 'none';
+  adminScreen.style.display = 'block';
+  initAdmin();
+}
+function showLogin() {
+  loginScreen.style.display = 'block';
+  adminScreen.style.display = 'none';
+  loginInput.focus();
+}
+
+// wenn schon in dieser Browser-Session eingeloggt:
+if (sessionStorage.getItem('SSA_AUTH') === '1') {
+  showAdmin();
+} else {
+  setTimeout(() => loginInput.focus(), 100);
+}
+
+/* ----------- ADMIN-OBERFLÄCHE ----------- */
+function initAdmin() {
+  // Filter-Dropdown füllen
+  const filterCat = document.getElementById('filter-cat');
+  filterCat.innerHTML = '<option value="">Alle Kategorien</option>' +
+    CATEGORIES.map(c => `<option value="${c.id}">${c.emoji} ${c.name}</option>`).join('');
+  filterCat.addEventListener('change', e => {
+    currentFilter = e.target.value;
+    renderItems();
+  });
+
+  // Kategorie-Dropdown im Formular füllen
+  document.getElementById('f-category').innerHTML =
+    CATEGORIES.map(c => `<option value="${c.id}">${c.emoji} ${c.name}</option>`).join('');
+
+  renderItems();
+
+  // Buttons
+  document.getElementById('new-btn').addEventListener('click', () => openForm());
+  document.getElementById('logout-btn').addEventListener('click', () => {
+    sessionStorage.removeItem('SSA_AUTH');
+    showLogin();
+  });
+  document.getElementById('cancel-btn').addEventListener('click', closeForm);
+  document.getElementById('delete-btn').addEventListener('click', deleteCurrent);
+  document.getElementById('form').addEventListener('submit', saveForm);
+  document.getElementById('export-btn').addEventListener('click', exportJSON);
+  document.getElementById('import-btn').addEventListener('click', () => document.getElementById('import-file').click());
+  document.getElementById('import-file').addEventListener('change', importJSON);
+
+  // Modal: Klick auf Hintergrund schliesst
+  document.getElementById('modal').addEventListener('click', e => {
+    if (e.target.id === 'modal') closeForm();
+  });
+  // Escape schliesst Modal
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && document.getElementById('modal').classList.contains('show')) closeForm();
+  });
+}
+
+/* ----------- Liste rendern ----------- */
+function renderItems() {
+  const container = document.getElementById('items');
+  const filtered = currentFilter
+    ? ITEMS.filter(it => Number(it.categoryId) === Number(currentFilter))
+    : ITEMS;
+
+  // Anzahl-Label aktualisieren
+  document.getElementById('count-label').textContent =
+    `Inhalte (${filtered.length}${currentFilter ? ' / ' + ITEMS.length : ''})`;
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="empty-list">
+        Noch keine Inhalte hier.<br>Erfasse über »+ Neuer Inhalt« den ersten Eintrag.
+      </div>`;
+    return;
+  }
+
+  // sortiere alphabetisch nach Titel innerhalb jeder Kategorie
+  const sorted = [...filtered].sort((a, b) => {
+    if (a.categoryId !== b.categoryId) return Number(a.categoryId) - Number(b.categoryId);
+    return (a.title || '').localeCompare(b.title || '');
+  });
+
+  container.innerHTML = sorted.map(it => {
+    const cat = CATEGORIES.find(c => c.id === Number(it.categoryId));
+    return `
+      <div class="item-row">
+        <div class="item-main">
+          <div class="item-meta">
+            <span class="badge">${cat ? cat.emoji + ' ' + escapeHtml(cat.name) : '—'}</span>
+            ${it.type  ? `<span class="badge type">${escapeHtml(it.type)}</span>`  : ''}
+            ${it.level ? `<span class="badge">${escapeHtml(it.level)}</span>` : ''}
+          </div>
+          <h4 class="item-title">${it.emoji ? it.emoji + ' ' : ''}${escapeHtml(it.title)}</h4>
+          <p class="item-desc">${escapeHtml(it.description || '—')}</p>
+        </div>
+        <div class="item-actions">
+          <button class="btn btn-secondary" data-edit="${it.id}">Bearbeiten</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Event-Listener für Bearbeiten-Buttons (Event Delegation wäre auch möglich)
+  container.querySelectorAll('[data-edit]').forEach(btn => {
+    btn.addEventListener('click', () => openForm(btn.dataset.edit));
+  });
+}
+
+/* ----------- Formular öffnen / schliessen ----------- */
+let editingId = null;
+
+function openForm(id) {
+  editingId = id || null;
+  const modal = document.getElementById('modal');
+  const titleEl = document.getElementById('modal-title');
+  const deleteBtn = document.getElementById('delete-btn');
+
+  // Felder zurücksetzen oder befüllen
+  if (editingId) {
+    const it = ITEMS.find(x => x.id === editingId);
+    if (!it) return;
+    titleEl.textContent = 'Inhalt bearbeiten';
+    document.getElementById('f-id').value       = it.id;
+    document.getElementById('f-title').value    = it.title || '';
+    document.getElementById('f-category').value = it.categoryId || 1;
+    document.getElementById('f-type').value     = it.type || 'Unterrichtsidee';
+    document.getElementById('f-level').value    = it.level || 'alle';
+    document.getElementById('f-emoji').value    = it.emoji || '';
+    document.getElementById('f-desc').value     = it.description || '';
+    document.getElementById('f-url').value      = it.url || '';
+    document.getElementById('f-keywords').value = it.keywords || '';
+    deleteBtn.style.display = 'inline-flex';
+  } else {
+    titleEl.textContent = 'Neuer Inhalt';
+    document.getElementById('form').reset();
+    document.getElementById('f-id').value = '';
+    // Vorauswahl: aktuell gefilterte Kategorie, falls vorhanden
+    if (currentFilter) document.getElementById('f-category').value = currentFilter;
+    deleteBtn.style.display = 'none';
+  }
+
+  modal.classList.add('show');
+  setTimeout(() => document.getElementById('f-title').focus(), 100);
+}
+
+function closeForm() {
+  document.getElementById('modal').classList.remove('show');
+  editingId = null;
+}
+
+/* ----------- Speichern ----------- */
+function saveForm(e) {
+  e.preventDefault();
+
+  const data = {
+    id:          document.getElementById('f-id').value || generateId(),
+    categoryId:  Number(document.getElementById('f-category').value),
+    title:       document.getElementById('f-title').value.trim(),
+    type:        document.getElementById('f-type').value,
+    level:       document.getElementById('f-level').value,
+    emoji:       document.getElementById('f-emoji').value.trim(),
+    description: document.getElementById('f-desc').value.trim(),
+    url:         document.getElementById('f-url').value.trim(),
+    keywords:    document.getElementById('f-keywords').value.trim()
+  };
+
+  if (!data.title) { toast('Bitte einen Titel eingeben.', 'error'); return; }
+
+  const idx = ITEMS.findIndex(x => x.id === data.id);
+  if (idx >= 0) {
+    ITEMS[idx] = data;
+    toast('Inhalt aktualisiert.', 'success');
+  } else {
+    ITEMS.push(data);
+    toast('Inhalt gespeichert.', 'success');
+  }
+  saveItems(ITEMS);
+  renderItems();
+  closeForm();
+}
+
+/* ----------- Löschen ----------- */
+function deleteCurrent() {
+  if (!editingId) return;
+  const it = ITEMS.find(x => x.id === editingId);
+  if (!it) return;
+  if (!confirm(`„${it.title}" wirklich löschen?`)) return;
+  ITEMS = ITEMS.filter(x => x.id !== editingId);
+  saveItems(ITEMS);
+  renderItems();
+  closeForm();
+  toast('Inhalt gelöscht.', 'success');
+}
+
+/* ----------- Export / Import als JSON ----------- */
+function exportJSON() {
+  const data = JSON.stringify(ITEMS, null, 2);
+  const blob = new Blob([data], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  const date = new Date().toISOString().slice(0,10);
+  a.href = url;
+  a.download = `sozialraumplus_${date}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast('JSON-Datei wurde heruntergeladen.', 'success');
+}
+
+function importJSON(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      if (!Array.isArray(data)) throw new Error('Datei muss ein JSON-Array enthalten.');
+      // einfache Validierung der Felder
+      data.forEach(it => { if (!it.id) it.id = generateId(); });
+      if (confirm(`Import: ${data.length} Inhalte einlesen?\n\nOK  = bestehende Daten ERSETZEN\nAbbr.= behalten`)) {
+        ITEMS = data;
+        saveItems(ITEMS);
+        renderItems();
+        toast(`${data.length} Inhalte importiert.`, 'success');
+      }
+    } catch (err) {
+      toast('Fehler beim Importieren: ' + err.message, 'error');
+    }
+    // Input zurücksetzen, damit gleiche Datei nochmal gewählt werden kann
+    e.target.value = '';
+  };
+  reader.readAsText(file);
+}
+
+/* ----------- Helfer ----------- */
+function generateId() {
+  return 'it-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7);
+}
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, m =>
+    ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[m]));
+}
+
+/* ----------- Toast ----------- */
+let toastTimer;
+function toast(msg, type = '') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast show ' + type;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2400);
+}
+</script>
+
+</body>
+</html>
